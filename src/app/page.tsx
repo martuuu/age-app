@@ -1,65 +1,83 @@
-import Image from "next/image";
+import { MatchCard } from "@/components/match-card";
+import { Trophy, History, Filter } from "lucide-react";
+import { createClient } from "@/lib/supabase/server";
 
-export default function Home() {
+export default async function Home() {
+  const supabase = await createClient();
+  
+  // Try to fetch matches
+  const { data: matches, error } = await supabase
+    .from("matches")
+    .select(`
+      *,
+      participants:match_participants(
+        team,
+        civilization,
+        player_color,
+        is_winner,
+        player:players(id, name, nickname, avatar_url)
+      )
+    `)
+    .order("played_at", { ascending: false });
+
+  // Fallback to empty or mock if error (e.g. env not set)
+  const displayMatches = matches || [];
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="space-y-6">
+      <header className="flex flex-col gap-2">
+        <h1 className="text-4xl font-black font-outfit tracking-tighter text-white">
+          HISTORIAL <span className="text-primary italic">AOE2</span>
+        </h1>
+        <p className="text-muted-foreground text-sm font-medium">
+          Partidas de nuestro grupo de jugadores.
+        </p>
+      </header>
+
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2 text-primary font-bold text-sm tracking-widest uppercase">
+          <History size={16} />
+          <span>Partidas Recientes</span>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+        <button className="text-muted-foreground hover:text-white transition-colors">
+          <Filter size={18} />
+        </button>
+      </div>
+
+      <div className="space-y-4">
+        {displayMatches.length === 0 ? (
+          <div className="text-center py-10 glass rounded-[2rem] overflow-hidden group">
+            <div className="h-48 w-full relative mb-6">
+              <img 
+                src="/assets/empty-state.png" 
+                alt="Empire silhouette" 
+                className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
+            </div>
+            <div className="px-6 space-y-2">
+              <Trophy size={40} className="mx-auto text-primary animate-pulse mb-2" />
+              <h3 className="text-lg font-bold font-outfit text-white">El campo está vacío</h3>
+              <p className="text-muted-foreground text-xs leading-relaxed max-w-[200px] mx-auto">
+                Aún no hay crónicas de batallas registradas en el Imperio.
+              </p>
+            </div>
+            {error && (
+              <div className="text-[10px] text-destructive/60 mt-6 px-4 font-mono uppercase tracking-tighter">
+                ERR: {error.message}
+              </div>
+            )}
+          </div>
+        ) : (
+          displayMatches.map((match: any) => (
+            <MatchCard key={match.id} match={match} />
+          ))
+        )}
+      </div>
+      
+      <div className="text-center py-10 opacity-30 text-xs">
+        Hecho para el Imperio. Nos vemos en el campo de batalla.
+      </div>
     </div>
   );
 }
