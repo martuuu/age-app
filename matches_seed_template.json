@@ -1,0 +1,55 @@
+{
+  "matches": [
+    {
+      "played_at": "2026-01-24T20:00:00",
+      "map_name": "Arabia",
+      "game_mode": "4v3",
+      "duration_minutes": null,
+      "winner_team": 1,
+      "notes": "Cargada desde historial por seed",
+      "participants": [
+        { "player_nickname": "chaqinha", "team": 1, "civilization": "Slavs", "player_color": "Orange" },
+        { "player_nickname": "juanfacundomena", "team": 1, "civilization": "Byzantines", "player_color": "Gray" },
+        { "player_nickname": "Martuuu89", "team": 1, "civilization": "Mongols", "player_color": "Yellow" },
+        { "player_nickname": "Ruso", "team": 1, "civilization": "Bohemians", "player_color": "Red" },
+        { "player_nickname": "Zevj", "team": 2, "civilization": "Persians", "player_color": "Green" },
+        { "player_nickname": "ML16798", "team": 2, "civilization": "Sicilians", "player_color": "Blue" },
+        { "player_nickname": "francoollearo", "team": 2, "civilization": "Mongols", "player_color": "Cyan" }
+      ]
+    },
+    {
+      "played_at": "2026-01-24T21:00:00",
+      "map_name": "Yucatan",
+      "game_mode": "4v3",
+      "duration_minutes": null,
+      "winner_team": 1,
+      "notes": "Cargada desde historial por seed",
+      "participants": [
+        { "player_nickname": "chaqinha", "team": 1, "civilization": "Berbers", "player_color": "Yellow" },
+        { "player_nickname": "juanfacundomena", "team": 1, "civilization": "Malay", "player_color": "Gray" },
+        { "player_nickname": "Martuuu89", "team": 1, "civilization": "Bulgarians", "player_color": "Purple" },
+        { "player_nickname": "Ruso", "team": 1, "civilization": "Portuguese", "player_color": "Red" },
+        { "player_nickname": "Zevj", "team": 2, "civilization": "Gurjaras", "player_color": "Blue" },
+        { "player_nickname": "ML16798", "team": 2, "civilization": "Italians", "player_color": "Green" },
+        { "player_nickname": "francoollearo", "team": 2, "civilization": "Byzantines", "player_color": "Cyan" }
+      ]
+    },
+    {
+      "played_at": "2026-01-24T22:00:00",
+      "map_name": "Arabia",
+      "game_mode": "4v3",
+      "duration_minutes": null,
+      "winner_team": 2,
+      "notes": "Cargada desde historial por seed",
+      "participants": [
+        { "player_nickname": "chaqinha", "team": 1, "civilization": "Poles", "player_color": "Yellow" },
+        { "player_nickname": "juanfacundomena", "team": 1, "civilization": "Ethiopians", "player_color": "Cyan" },
+        { "player_nickname": "Martuuu89", "team": 1, "civilization": "Bohemians", "player_color": "Purple" },
+        { "player_nickname": "Ruso", "team": 1, "civilization": "Saracens", "player_color": "Red" },
+        { "player_nickname": "Zevj", "team": 2, "civilization": "Teutons", "player_color": "Blue" },
+        { "player_nickname": "ML16798", "team": 2, "civilization": "Romans", "player_color": "Gray" },
+        { "player_nickname": "francoollearo", "team": 2, "civilization": "Goths", "player_color": "Green" }
+      ]
+    }
+  ]
+}

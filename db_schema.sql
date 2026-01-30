@@ -1,7 +1,13 @@
 -- ============================================
--- Age of Empires 2 Match History Schema (v2)
+-- Age of Empires 2 Match History Schema (v2.1)
 -- Enhanced for comprehensive statistics tracking
 -- ============================================
+
+-- RESET: Borrar todo lo anterior para evitar errores de duplicidad (políticas, triggers, etc.)
+-- Se usa CASCADE para limpiar dependencias automáticamente.
+DROP TABLE IF EXISTS match_participants CASCADE;
+DROP TABLE IF EXISTS matches CASCADE;
+DROP TABLE IF EXISTS players CASCADE;
 
 -- 1. PLAYERS TABLE
 -- Stores all registered players with their preferences
@@ -9,9 +15,11 @@ CREATE TABLE IF NOT EXISTS players (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   name TEXT NOT NULL UNIQUE,
   nickname TEXT,
-  preferred_color TEXT, -- Player's favorite color (e.g., 'Blue', 'Red', 'Green')
+  email TEXT,                       -- Email for future user authentication
+  steam_id TEXT,                    -- Steam ID for API integration (aoe2insights, etc.)
+  preferred_color TEXT,             -- Player's favorite color (e.g., 'Blue', 'Red', 'Green')
   avatar_url TEXT,
-  elo_rating INTEGER DEFAULT 1000, -- Starting ELO for ranking
+  elo_rating INTEGER DEFAULT 1000,  -- Starting ELO for ranking
   total_matches INTEGER DEFAULT 0,
   total_wins INTEGER DEFAULT 0,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
@@ -142,7 +150,7 @@ EXECUTE FUNCTION delete_empty_matches();
 -- ============================================
 -- You can use this list for dropdowns in your forms
 COMMENT ON COLUMN match_participants.civilization IS 
-'Popular AoE2 civilizations: Aztecs, Berbers, Bohemians, Britons, Bulgarians, Burgundians, Burmese, Byzantines, Celts, Chinese, Cumans, Ethiopians, Franks, Goths, Gurjaras, Hindustanis, Huns, Incas, Italians, Japanese, Khmer, Koreans, Lithuanians, Magyars, Malay, Malians, Mayans, Mongols, Persians, Poles, Portuguese, Saracens, Sicilians, Slavs, Spanish, Tatars, Teutons, Turks, Vietnamese, Vikings';
+'Civilizaciones AoE2: Armenians, Aztecs, Bengalis, Berbers, Bohemians, Britons, Bulgarians, Burgundians, Burmese, Byzantines, Celts, Chinese, Cumans, Dravidians, Ethiopians, Franks, Georgians, Goths, Gurjaras, Hindustanis, Huns, Inca, Italians, Japanese, Jurchens, Khitans, Khmer, Koreans, Lithuanians, Magyars, Malay, Malians, Mapuche, Maya, Mongols, Muisca, Persians, Poles, Portuguese, Romans, Saracens, Shu, Sicilians, Slavs, Spanish, Tatars, Teutons, Tupi, Turks, Vietnamese, Vikings, Wei, Wu';
 
 COMMENT ON COLUMN match_participants.player_color IS 
 'Available colors: Blue, Red, Green, Yellow, Cyan, Purple, Gray, Orange';
