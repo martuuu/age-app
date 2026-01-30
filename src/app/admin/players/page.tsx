@@ -7,6 +7,8 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
+// Player
+
 interface Player {
   id: string;
   name: string;
