@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS players (
 CREATE TABLE IF NOT EXISTS matches (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   played_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  title TEXT, -- Optional descriptive title for the match
   map_name TEXT NOT NULL DEFAULT 'Arabia',
   game_mode TEXT DEFAULT '1v1', -- e.g., '1v1', '2v2', '3v3', '4v4', 'FFA'
   duration_minutes INTEGER, -- Match duration in minutes (optional)

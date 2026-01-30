@@ -23,7 +23,13 @@ export default function Home() {
         const { data: matchesData, error: matchesError } = await supabase
           .from("matches")
           .select(`
-            *,
+            id,
+            played_at,
+            title,
+            map_name,
+            game_mode,
+            duration_minutes,
+            winner_team,
             participants:match_participants(
               team,
               civilization,
@@ -71,7 +77,7 @@ export default function Home() {
     <div className="space-y-6">
       <header className="flex flex-col gap-2">
         <h1 className="text-4xl font-black font-outfit tracking-tighter text-white">
-          HISTORIAL <span className="text-primary italic">AOE2</span>
+          PANADEROS <span className="text-primary italic">AOE2</span>
         </h1>
         <p className="text-muted-foreground text-sm font-medium">
           Partidas de nuestro grupo de jugadores.
@@ -154,7 +160,7 @@ export default function Home() {
           <div className="flex items-center justify-between px-1">
             <div className="flex items-center gap-2 text-primary font-black text-[10px] tracking-[0.3em] uppercase">
               <History size={14} strokeWidth={3} />
-              <span>Cronología Imperial</span>
+              <span>Historial en LAN</span>
             </div>
             <button className="text-muted-foreground hover:text-white transition-colors">
               <Filter size={18} />

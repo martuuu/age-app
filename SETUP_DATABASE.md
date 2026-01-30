@@ -51,7 +51,7 @@ npm run dev
 - **Timestamps**: fecha de creación y última actualización
 
 ### Tabla `matches`
-- **Metadata del partido**: fecha, mapa, modo de juego (1v1, 2v2, etc.)
+- **Metadata del partido**: fecha, título descriptivo, mapa, modo de juego (1v1, 2v2, etc.)
 - **Resultados**: equipo ganador
 - **Duración**: minutos jugados (opcional)
 - **Notas**: comentarios sobre la partida

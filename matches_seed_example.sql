@@ -7,8 +7,8 @@ DECLARE
   v_match_id UUID;
 BEGIN
   -- PARTIDA 1: Arabia (4v3)
-  INSERT INTO matches (played_at, map_name, game_mode, winner_team, notes)
-  VALUES ('2026-01-24 18:00:00+00', 'Arabia', '4v3', 1, 'Partida 1 - Planilla')
+  INSERT INTO matches (played_at, title, map_name, game_mode, winner_team, notes)
+  VALUES ('2026-01-24 18:00:00+00', 'Los lanceros esteparios de Martu arrasaron', 'Arabia', '4v3', 1, 'Partida 1 - Planilla')
   RETURNING id INTO v_match_id;
   
   INSERT INTO match_participants (match_id, player_id, team, civilization, player_color, is_winner)
@@ -22,8 +22,8 @@ BEGIN
     (v_match_id, (SELECT id FROM players WHERE nickname = 'Fran'), 2, 'Mongols', 'Cyan', false);
 
   -- PARTIDA 2: Yucatan (4v3)
-  INSERT INTO matches (played_at, map_name, game_mode, winner_team, notes)
-  VALUES ('2026-01-24 19:00:00+00', 'Yucatan', '4v3', 1, 'Partida 2 - Planilla')
+  INSERT INTO matches (played_at, title, map_name, game_mode, winner_team, notes)
+  VALUES ('2026-01-24 19:00:00+00', 'La resistencia malaya de juanfacundomena', 'Yucatan', '4v3', 1, 'Partida 2 - Planilla')
   RETURNING id INTO v_match_id;
   
   INSERT INTO match_participants (match_id, player_id, team, civilization, player_color, is_winner)
@@ -37,8 +37,8 @@ BEGIN
     (v_match_id, (SELECT id FROM players WHERE nickname = 'Fran'), 2, 'Byzantines', 'Cyan', false);
 
   -- PARTIDA 3: Arabia (4v3)
-  INSERT INTO matches (played_at, map_name, game_mode, winner_team, notes)
-  VALUES ('2026-01-24 20:00:00+00', 'Arabia', '4v3', 2, 'Partida 3 - Planilla')
+  INSERT INTO matches (played_at, title, map_name, game_mode, winner_team, notes)
+  VALUES ('2026-01-24 20:00:00+00', 'No importa cuando leas esto: zevj corriendo', 'Arabia', '4v3', 2, 'Partida 3 - Planilla')
   RETURNING id INTO v_match_id;
   
   INSERT INTO match_participants (match_id, player_id, team, civilization, player_color, is_winner)
@@ -52,8 +52,8 @@ BEGIN
     (v_match_id, (SELECT id FROM players WHERE nickname = 'Fran'), 2, 'Goths', 'Green', true);
 
   -- PARTIDA 4: Valle (4v3)
-  INSERT INTO matches (played_at, map_name, game_mode, winner_team, notes)
-  VALUES ('2026-01-24 21:00:00+00', 'Valley', '4v3', 1, 'Partida 4 - Planilla')
+  INSERT INTO matches (played_at, title, map_name, game_mode, winner_team, notes)
+  VALUES ('2026-01-24 21:00:00+00', 'Solides ofensiva', 'Valley', '4v3', 1, 'Partida 4 - Planilla')
   RETURNING id INTO v_match_id;
   
   INSERT INTO match_participants (match_id, player_id, team, civilization, player_color, is_winner)
@@ -67,8 +67,8 @@ BEGIN
     (v_match_id, (SELECT id FROM players WHERE nickname = 'Fran'), 2, 'Mongols', 'Green', false);
 
   -- PARTIDA 5: Selva negra (3v4)
-  INSERT INTO matches (played_at, map_name, game_mode, winner_team, notes)
-  VALUES ('2026-01-24 22:00:00+00', 'Black Forest', '3v4', 1, 'Partida 5 - Planilla')
+  INSERT INTO matches (played_at, title, map_name, game_mode, winner_team, notes)
+  VALUES ('2026-01-24 22:00:00+00', 'La partida de la polémica. Easy GG. Zevj en japi.', 'Black Forest', '3v4', 1, 'Partida 5 - Planilla')
   RETURNING id INTO v_match_id;
   
   INSERT INTO match_participants (match_id, player_id, team, civilization, player_color, is_winner)

@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 
 export const metadata: Metadata = {
-  title: "AOE2 - Historial de Partidas",
+  title: "PANADEROS - Historial AOE2",
   description: "Historial de partidas de Age of Empires 2 para nuestro grupo.",
 };
 

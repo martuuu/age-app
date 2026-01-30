@@ -39,7 +39,6 @@ export default function LoginPage() {
           <ShieldCheck className="text-primary" size={32} />
         </div>
         <h1 className="text-3xl font-black font-outfit">LOGIN ADMIN</h1>
-        <p className="text-muted-foreground text-sm">Resguardado por los dioses de la guerra.</p>
       </div>
 
       <form onSubmit={handleLogin} className="glass-card w-full max-w-sm space-y-4">

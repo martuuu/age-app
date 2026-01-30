@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/client";
 import { Trophy, Star, TrendingUp, Medal, Sword, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 export default function RankingPage() {
   const [rankedPlayers, setRankedPlayers] = useState<any[]>([]);
@@ -44,7 +45,6 @@ export default function RankingPage() {
     <div className="space-y-8 pb-32">
       <header className="space-y-2">
         <h1 className="text-4xl font-black font-outfit uppercase tracking-tighter">Ranking <span className="text-primary italic">Global</span></h1>
-        <p className="text-muted-foreground text-sm font-medium">Los guerreros más destacados del imperio.</p>
       </header>
 
       {error && (
@@ -57,39 +57,68 @@ export default function RankingPage() {
         <div className="grid grid-cols-3 items-end gap-2 pt-16 pb-8 px-2 relative min-h-[300px]">
           {/* Silver - Rank 2 */}
           <div className="flex flex-col items-center gap-2">
-            <div className="w-16 h-16 rounded-full border-2 border-slate-400 bg-slate-400/10 flex items-center justify-center text-xl font-black text-slate-300 shadow-lg">
-              {rankedPlayers[1].name[0]}
+            <div className="w-16 h-16 rounded-full border-2 border-slate-400 bg-slate-400/10 flex items-center justify-center overflow-hidden shadow-lg">
+              {rankedPlayers[1].avatar_url ? (
+                <Image 
+                  src={rankedPlayers[1].avatar_url} 
+                  alt={rankedPlayers[1].name}
+                  width={64}
+                  height={64}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <span className="text-xl font-black text-slate-300">{rankedPlayers[1].name[0]}</span>
+              )}
             </div>
             <div className="text-center">
               <div className="font-black text-[11px] truncate w-20 uppercase tracking-tighter">{rankedPlayers[1].nickname || rankedPlayers[1].name}</div>
               <div className="text-[10px] text-muted-foreground font-bold">{rankedPlayers[1].total_wins}W</div>
             </div>
-            <div className="h-16 w-full bg-slate-400/20 rounded-t-2xl flex items-center justify-center font-black text-2xl text-slate-400">2</div>
+            <div className="h-16 w-full bg-slate-400/40 rounded-t-2xl flex items-center justify-center font-black text-2xl text-slate-400">2</div>
           </div>
 
           {/* Gold - Rank 1 */}
           <div className="flex flex-col items-center gap-2 -mt-12 relative z-10">
-            <Trophy className="text-yellow-500 absolute -mt-10 animate-bounce" size={28} />
-            <div className="w-24 h-24 rounded-full border-4 border-yellow-500/50 bg-yellow-500/10 flex items-center justify-center text-3xl font-black text-primary shadow-[0_0_30px_rgba(234,179,8,0.3)]">
-              {rankedPlayers[0].name[0]}
+            <div className="w-24 h-24 rounded-full border-4 border-yellow-500/50 bg-yellow-500/10 flex items-center justify-center overflow-hidden shadow-[0_0_30px_rgba(234,179,8,0.3)]">
+              {rankedPlayers[0].avatar_url ? (
+                <Image 
+                  src={rankedPlayers[0].avatar_url} 
+                  alt={rankedPlayers[0].name}
+                  width={96}
+                  height={96}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <span className="text-3xl font-black text-primary">{rankedPlayers[0].name[0]}</span>
+              )}
             </div>
             <div className="text-center">
               <div className="font-black text-sm truncate w-24 text-primary uppercase tracking-tighter">{rankedPlayers[0].nickname || rankedPlayers[0].name}</div>
               <div className="text-[10px] text-primary/80 font-black">{rankedPlayers[0].total_wins} VICTORIAS</div>
             </div>
-            <div className="h-28 w-full bg-primary/30 rounded-t-2xl flex items-center justify-center font-black text-4xl text-primary shadow-inner">1</div>
+            <div className="h-28 w-full bg-primary/60 rounded-t-2xl flex items-center justify-center font-black text-4xl text-primary shadow-inner">1</div>
           </div>
 
           {/* Bronze - Rank 3 */}
           <div className="flex flex-col items-center gap-2">
-            <div className="w-16 h-16 rounded-full border-2 border-orange-700 bg-orange-700/10 flex items-center justify-center text-xl font-black text-orange-600 shadow-lg">
-              {rankedPlayers[2].name[0]}
+            <div className="w-16 h-16 rounded-full border-2 border-orange-700 bg-orange-700/10 flex items-center justify-center overflow-hidden shadow-lg">
+              {rankedPlayers[2].avatar_url ? (
+                <Image 
+                  src={rankedPlayers[2].avatar_url} 
+                  alt={rankedPlayers[2].name}
+                  width={64}
+                  height={64}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <span className="text-xl font-black text-orange-600">{rankedPlayers[2].name[0]}</span>
+              )}
             </div>
             <div className="text-center">
               <div className="font-black text-[11px] truncate w-20 uppercase tracking-tighter">{rankedPlayers[2].nickname || rankedPlayers[2].name}</div>
               <div className="text-[10px] text-muted-foreground font-bold">{rankedPlayers[2].total_wins}W</div>
             </div>
-            <div className="h-12 w-full bg-orange-700/20 rounded-t-2xl flex items-center justify-center font-black text-xl text-orange-700">3</div>
+            <div className="h-12 w-full bg-orange-700/40 rounded-t-2xl flex items-center justify-center font-black text-xl text-orange-700">3</div>
           </div>
         </div>
       )}
@@ -110,13 +139,27 @@ export default function RankingPage() {
             </div>
             
             <div 
-              className="w-12 h-12 rounded-2xl flex items-center justify-center text-lg font-black border-2 shrink-0 bg-black/20"
+              className="w-12 h-12 rounded-2xl flex items-center justify-center border-2 shrink-0 bg-black/20 overflow-hidden"
               style={{ 
                 borderColor: player.preferred_color || 'gray',
-                color: player.preferred_color || 'white'
               }}
             >
-              {player.name[0]}
+              {player.avatar_url ? (
+                <Image 
+                  src={player.avatar_url} 
+                  alt={player.name}
+                  width={48}
+                  height={48}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <span 
+                  className="text-lg font-black"
+                  style={{ color: player.preferred_color || 'white' }}
+                >
+                  {player.name[0]}
+                </span>
+              )}
             </div>
 
             <div className="flex-1 min-w-0">

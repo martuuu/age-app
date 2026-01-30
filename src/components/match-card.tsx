@@ -1,8 +1,9 @@
-import { Calendar, Users } from "lucide-react";
+import { Calendar, ScrollText } from "lucide-react";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import Image from "next/image";
 
 interface Participant {
   team: number;
@@ -22,6 +23,7 @@ interface MatchCardProps {
     id: string;
     played_at: string;
     map_name: string;
+    title?: string;
     winner_team: number;
     game_mode: string;
     duration_minutes?: number;
@@ -36,14 +38,14 @@ export function MatchCard({ match }: MatchCardProps) {
   return (
     <div className="glass-card mb-4 animate-fade-in-up group hover:bg-white/5 transition-colors">
       <div className="flex justify-between items-start mb-4">
-        <div>
-          <div className="flex items-center gap-2">
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2 mb-1.5">
             <h3 className="text-xl font-bold font-outfit text-primary flex items-center gap-2">
               {match.map_name}
             </h3>
-            <span className="text-[10px] bg-white/10 px-1.5 py-0.5 rounded text-muted-foreground uppercase">{match.game_mode}</span>
+            <span className="text-[10px] bg-white/10 px-1.5 py-0.5 rounded text-muted-foreground uppercase font-bold">{match.game_mode}</span>
           </div>
-          <div className="flex items-center gap-2 text-xs text-muted-foreground mt-1">
+          <div className="flex items-center gap-2 text-xs text-muted-foreground">
             <Calendar size={12} />
             {format(new Date(match.played_at), "d 'de' MMMM, yyyy", { locale: es })}
             {match.duration_minutes && (
@@ -55,7 +57,7 @@ export function MatchCard({ match }: MatchCardProps) {
           </div>
         </div>
         <div className={cn(
-          "px-3 py-1 rounded-full text-xs font-bold border",
+          "px-3 py-1 rounded-full text-xs font-bold border shrink-0 ml-3",
           match.winner_team === 1 ? "bg-primary/10 text-primary border-primary/20" : "bg-blue-400/10 text-blue-400 border-blue-400/20" 
         )}>
           Equipo {match.winner_team} Gana
@@ -87,6 +89,23 @@ export function MatchCard({ match }: MatchCardProps) {
           ))}
         </div>
       </div>
+
+      {/* Epic Title Section - Featured when present */}
+      {match.title && (
+        <div className="mt-5 pt-4 border-t border-primary/10 relative overflow-hidden">
+          <div className="absolute inset-0 bg-linear-to-r from-primary/5 via-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="relative flex items-start gap-3">
+            <div className="mt-0.5 text-primary/60 shrink-0">
+              <ScrollText size={16} className="group-hover:text-primary transition-colors" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-bold text-white/95 leading-relaxed italic group-hover:text-white transition-colors">
+                &ldquo;{match.title}&rdquo;
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -101,7 +120,13 @@ function PlayerRow({ participant, align }: { participant: Participant, align: "l
       style={{ borderColor: participant.player_color }}
       >
         {participant.player.avatar_url ? (
-          <img src={participant.player.avatar_url} alt={participant.player.name} className="w-full h-full object-cover" />
+          <Image 
+            src={participant.player.avatar_url} 
+            alt={participant.player.name} 
+            width={32}
+            height={32}
+            className="w-full h-full object-cover" 
+          />
         ) : (
           <div className="w-full h-full bg-white/5 flex items-center justify-center">
             {participant.player.name[0]}

@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/client";
 import { ArrowLeft, Trash2, Pencil, Users, Loader2, Plus, Sword, Star } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 interface Player {
   id: string;
@@ -12,6 +13,7 @@ interface Player {
   nickname: string;
   steam_id: string;
   preferred_color: string;
+  avatar_url?: string;
   total_matches: number;
   total_wins: number;
   elo_rating: number;
@@ -199,10 +201,25 @@ export default function PlayersAdminPage() {
             >
               <div className="flex items-center gap-4 min-w-0">
                 <div 
-                  className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl font-black shrink-0 shadow-inner bg-black/40 border-2"
-                  style={{ color: p.preferred_color, borderColor: p.preferred_color }}
+                  className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 shadow-inner bg-black/40 border-2 overflow-hidden"
+                  style={{ borderColor: p.preferred_color }}
                 >
-                  {p.name[0]}
+                  {p.avatar_url ? (
+                    <Image 
+                      src={p.avatar_url} 
+                      alt={p.name}
+                      width={48}
+                      height={48}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <span 
+                      className="text-xl font-black"
+                      style={{ color: p.preferred_color }}
+                    >
+                      {p.name[0]}
+                    </span>
+                  )}
                 </div>
                 <div className="min-w-0">
                   <div className="font-black text-sm uppercase tracking-tight flex items-center gap-2 truncate">

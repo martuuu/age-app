@@ -6,6 +6,7 @@
       "game_mode": "4v3",
       "duration_minutes": null,
       "winner_team": 1,
+      "title": "Los lanceros esteparios de Martu arrasaron",
       "notes": "Cargada desde historial por seed",
       "participants": [
         { "player_nickname": "chaqinha", "team": 1, "civilization": "Slavs", "player_color": "Orange" },
@@ -23,6 +24,7 @@
       "game_mode": "4v3",
       "duration_minutes": null,
       "winner_team": 1,
+      "title": "Resistencia heroica en la selva",
       "notes": "Cargada desde historial por seed",
       "participants": [
         { "player_nickname": "chaqinha", "team": 1, "civilization": "Berbers", "player_color": "Yellow" },
@@ -40,6 +42,7 @@
       "game_mode": "4v3",
       "duration_minutes": null,
       "winner_team": 2,
+      "title": "Duelo épico bajo el sol del desierto",
       "notes": "Cargada desde historial por seed",
       "participants": [
         { "player_nickname": "chaqinha", "team": 1, "civilization": "Poles", "player_color": "Yellow" },

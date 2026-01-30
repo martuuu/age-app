@@ -1,15 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { History, PlusCircle, Trophy, User, Book } from "lucide-react";
+import { History, PlusCircle, Trophy, Users, Book } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
   { label: "Historial", icon: History, href: "/" },
-  { label: "Admin", icon: PlusCircle, href: "/admin" },
+  { label: "Jugadores", icon: Users, href: "/players" },
   { label: "Ranking", icon: Trophy, href: "/ranking" },
   { label: "Wiki", icon: Book, href: "/wiki" },
+  { label: "Admin", icon: PlusCircle, href: "/admin" },
 ];
 
 export function Navbar() {
